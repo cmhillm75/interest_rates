@@ -50,6 +50,8 @@ SELECT column_name, data_type
 FROM information_schema.columns 
 WHERE table_name IN ('30_rate', 'debt', 'fed_rate', 'hpi');
 
+
+-- Join all the tables into 1 for output to Tableau
 SELECT 
     d."Date",
     d."Total_Public_Debt",
@@ -60,3 +62,78 @@ FROM public."debt" d
 JOIN public."fed_rate" f ON d."Date" = f."Date"
 JOIN public."30_rate" r ON d."Date" = r."Date"
 JOIN public."hpi" h ON d."Date" = h."Date";
+
+CREATE TABLE public."combined_table" AS
+SELECT  
+    d."Date",
+    d."Total_Public_Debt",
+    f."Fed_Funds_Rate",
+    r."Fixed_30_Rate",
+    h."House_Price_Index"
+FROM public."debt" d
+JOIN public."fed_rate" f ON d."Date" = f."Date"
+JOIN public."30_rate" r ON d."Date" = r."Date"
+JOIN public."hpi" h ON d."Date" = h."Date";
+
+
+-- Select all the data in combined_table
+SELECT * FROM public."combined_table";
+
+
+-- When adding new data to tables
+TRUNCATE TABLE public."combined_table";  -- Clears existing data
+INSERT INTO public."combined_table"
+SELECT  
+    d."Date",
+    d."Total_Public_Debt",
+    f."Fed_Funds_Rate",
+    r."Fixed_30_Rate",
+    h."House_Price_Index"
+FROM public."debt" d
+JOIN public."fed_rate" f ON d."Date" = f."Date"
+JOIN public."30_rate" r ON d."Date" = r."Date"
+JOIN public."hpi" h ON d."Date" = h."Date";
+
+
+
+-- Check for the Min and Max rate categories
+WITH MaxMinRates AS (
+    SELECT 
+        MAX("Fed_Funds_Rate") AS max_fed_rate,
+        MIN("Fed_Funds_Rate") AS min_fed_rate,
+        MAX("Fixed_30_Rate") AS max_fixed_rate,
+        MIN("Fixed_30_Rate") AS min_fixed_rate
+    FROM public."combined_table"
+)
+SELECT 
+    c."Date",
+    c."Total_Public_Debt",
+    c."House_Price_Index",
+    c."Fed_Funds_Rate",
+    c."Fixed_30_Rate"
+FROM public."combined_table" c
+JOIN MaxMinRates mm ON 
+    c."Fed_Funds_Rate" IN (mm.max_fed_rate, mm.min_fed_rate)
+    OR c."Fixed_30_Rate" IN (mm.max_fixed_rate, mm.min_fixed_rate);
+
+
+-- Query for Fed_Runds Rate
+SELECT 
+    "Date", 
+    "Total_Public_Debt", 
+    "House_Price_Index", 
+    "Fed_Funds_Rate" 
+FROM public."combined_table" 
+WHERE "Fed_Funds_Rate" = (SELECT MAX("Fed_Funds_Rate") FROM public."combined_table") 
+   OR "Fed_Funds_Rate" = (SELECT MIN("Fed_Funds_Rate") FROM public."combined_table");
+
+-- Query for Fixed_30_Rate
+SELECT 
+    "Date", 
+    "Total_Public_Debt", 
+    "House_Price_Index", 
+    "Fixed_30_Rate" 
+FROM public."combined_table" 
+WHERE "Fixed_30_Rate" = (SELECT MAX("Fixed_30_Rate") FROM public."combined_table") 
+   OR "Fixed_30_Rate" = (SELECT MIN("Fixed_30_Rate") FROM public."combined_table");
+	
