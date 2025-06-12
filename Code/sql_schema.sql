@@ -150,3 +150,18 @@ DROP TABLE IF EXISTS income;
 
 -- View data in the income table
 SELECT * FROM income;
+
+
+-- add income data to combined table
+ALTER TABLE public."combined_table"
+ADD COLUMN "Median_Household_Income" BIGINT;
+
+UPDATE public."combined_table" c
+SET "Median_Household_Income" = i."Median_Household_Income"
+FROM public."income" i
+WHERE c."Date" = i."Date";
+
+-- query the updated table data
+SELECT * FROM public."combined_table"
+ORDER BY "Date" ASC;
+-- LIMIT 10;
