@@ -44,3 +44,6 @@ Federal Reserve Bank of St. Louis; <https://fred.stlouisfed.org/series/GFDEBTN>,
 Suggested Citation:
 U.S. Census Bureau, Real Median Family Income in the United States [MEFAINUSA672N], retrieved from FRED,
 Federal Reserve Bank of St. Louis; <https://fred.stlouisfed.org/series/MEFAINUSA672N>, June 11, 2025.
+
+Suggested Citation:
+U.S. Census Bureau and U.S. Department of Housing and Urban Development, Median Sales Price of Houses Sold for the United States [MSPUS], retrieved from FRED, Federal Reserve Bank of St. Louis; <https://fred.stlouisfed.org/series/MSPUS>, June 12, 2025.
