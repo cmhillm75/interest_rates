@@ -35,7 +35,12 @@ A "dofollow" backlink to the originating page is also required if the data is di
 ```
 
 Suggested Citation:
-U.S. Federal Housing Finance Agency, All-Transactions House Price Index for the United States [USSTHPI], retrieved from FRED, Federal Reserve Bank of St. Louis; https://fred.stlouisfed.org/series/USSTHPI, May 17, 2025.
+U.S. Federal Housing Finance Agency, All-Transactions House Price Index for the United States [USSTHPI], retrieved from FRED, Federal Reserve Bank of St. Louis; <https://fred.stlouisfed.org/series/USSTHPI>, May 17, 2025.
 
 Suggested Citation:
-U.S. Department of the Treasury. Fiscal Service, Federal Debt: Total Public Debt [GFDEBTN], retrieved from FRED, Federal Reserve Bank of St. Louis; https://fred.stlouisfed.org/series/GFDEBTN, May 17, 2025.
+U.S. Department of the Treasury. Fiscal Service, Federal Debt: Total Public Debt [GFDEBTN], retrieved from FRED,
+Federal Reserve Bank of St. Louis; <https://fred.stlouisfed.org/series/GFDEBTN>, May 17, 2025.
+
+Suggested Citation:
+U.S. Census Bureau, Real Median Family Income in the United States [MEFAINUSA672N], retrieved from FRED,
+Federal Reserve Bank of St. Louis; <https://fred.stlouisfed.org/series/MEFAINUSA672N>, June 11, 2025.

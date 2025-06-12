@@ -136,4 +136,17 @@ SELECT
 FROM public."combined_table" 
 WHERE "Fixed_30_Rate" = (SELECT MAX("Fixed_30_Rate") FROM public."combined_table") 
    OR "Fixed_30_Rate" = (SELECT MIN("Fixed_30_Rate") FROM public."combined_table");
-	
+
+
+-- Create table for income
+CREATE TABLE income (
+    "Date" DATE,
+    "Median_Household_Income" BIGINT
+);
+
+
+-- Drop table 
+DROP TABLE IF EXISTS income;
+
+-- View data in the income table
+SELECT * FROM income;
